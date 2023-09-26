@@ -27,16 +27,32 @@ async function getRandomUser() {
   addData(newUser);
 }
 
+//Double Everyone´s Money
+function doubleMoney() {
+  data = data.map((user) => {
+    return { ...user, money: user.money * 2 };
+  });
+
+  updateDOM();
+}
+
+//Sort users by richest
+function sortByRichest() {
+  data.sort((a, b) => b.money - a.money);
+
+  updateDOM();
+}
+
 //add new object to data array
 function addData(obj) {
   data.push(obj);
 
-  updateDom();
+  updateDOM();
 }
 
 //Update Dom
 
-function updateDom(providedData = data) {
+function updateDOM(providedData = data) {
   //Clear main div
 
   main.innerHTML = '<h2><strong>Person</strong>Wealth</h2>';
@@ -58,3 +74,5 @@ function formatMoney(number) {
 
 //Event Listeners
 addUserBtn.addEventListener('click', getRandomUser);
+doubleBtn.addEventListener('click', doubleMoney);
+sortBtn.addEventListener('click', sortByRichest);
